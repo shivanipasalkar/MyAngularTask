@@ -1,0 +1,36 @@
+<h2>Log In Here</h2>
+<hr />
+<div class="container">
+<div class="col-sm-6">
+    <form #form="ngForm"  (ngSubmit)="LoginUser(form)">
+        <div class="mb-3 text-danger">
+            {{error}}
+        </div>
+        <div class="mb-3">
+            <label for="" class="form-label">User Name</label>
+            <input type="text" name="username" class="form-control w-30" ngModel 
+            #username="ngModel" required 
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            [ngClass]="{error:username.touched && username.invalid}"/>
+            
+            <span [style.color]="'red'"
+            *ngIf="username.touched && !username.dirty
+             && username.invalid">User Name is Required</span>
+              <span [style.color]="'red'"
+              *ngIf="username.touched && username.dirty
+              && username.invalid"> Invalid UserName</span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" class="form-control w-30"ngModel
+            required 
+            #password="ngModel"
+            [ngClass]="{error:password.touched && password.invalid}">
+            <span [style.color]="'red'" *ngIf="password.touched && password.invalid">password is required</span>
+        </div>
+        <div class="mb-3">
+            <input type="submit" value="Login" class="btn btn-primary" 
+             [disabled]="form.untouched || form.invalid"  />
+        </div>
+    </form>
+</div></div>

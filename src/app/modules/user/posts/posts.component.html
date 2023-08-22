@@ -1,0 +1,38 @@
+<div *ngIf="posts.length>0 else noposts">
+
+    <h2> All Posts</h2>
+    <span class="badge bg-warning">{{posts.length}}</span>
+
+    <div class="table-responsive">
+        <table class="table table-primary">
+            <thead>
+                <tr>
+                    <th scope="col">User ID</th>
+                    <th scope="col">Id</th>
+                    <th scope="col">Title</th>
+                  
+                    <th scope="col">Body</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="" *ngFor="let post of posts |
+                paginate:{
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems:count}; let i = index ">
+                    <td> userId : {{post.userId}}</td>
+                    <td>ID : {{post.id}}</td>
+                    <td>Title : {{post.title}}</td>
+                    
+                    <td>Body : {{post.body}}</td>
+            </tbody>
+        </table>
+        <div>
+            <pagination-controls previousLabel="Prev"
+            nextLabel="Next" (pageChange)="onTableDataChange($event)"></pagination-controls>
+        </div>
+    </div>
+</div>
+<ng-template #noposts>
+    <div class="alert alert-danger text-center">{{message }}</div>
+</ng-template>
